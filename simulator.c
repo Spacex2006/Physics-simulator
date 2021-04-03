@@ -6,18 +6,43 @@
 #include <time.h>
 #include <conio.h>
 #include <windows.h>
+#include <graphics.h>
+#include <unistd.h>
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m"
+#define BLUE    "\x1b[34m"
+#define MAGNETA "\x1b[35m"
+#define CYAN    "\x1b[36m"
+#define RESET   "\x1b[0m"
 int main() 
 {
-
+	lol:
 	double msec;
-	int b;
-	int c;
+	int a,b,c,d,e;
+	int iterations;
 	clock_t before = clock();
-
 	//starting simulation part
 	double q1, q2, r, m1, m2, someconstant1, someconstant2, s1, s2, s3, s4, a1, a2, position1=0, position2=1, u1=0, u2=0, t=0, t1, p1, p2, v;
-	printf("WELCOME\npresss something too continue");
+	system("cls");
+	printf(GREEN"WELCOME\npress some thing to continue");
 	getch();
+	system("cls");
+	printf("press 1 for default system \npress 2 to manualy select all settings");
+	scanf("%d",&e);
+	if(e==2)
+	{
+		printf("please select text colour for interface ");
+		printf("Sorry but this part of simulator is still in development press h to go to home");
+		if(kbhit())
+		{
+			char ch=getch();
+			if(ch=='h')
+			{
+				goto lol;
+			}
+		}
+	}
 	system("cls");
 	printf("which forces do you want\npress 1 for only gravity\npress 2 for only electromagnetism\npress 3 for both\n");
 	scanf("%d",&c);
@@ -90,7 +115,7 @@ int main()
 			printf("\nobject1:- \npostion:- %lf\nvelocity:- %lf\ntime:- %lf\n",position1,u1,t);
 			printf("\nobject2:- \npostion:- %lf\nvelocity:- %lf\ntime:- %lf\n",position2,u2,t);
 			printf("\ntime done: %d\n",b);
-			printf("press p to pause and e to end");
+			printf("press p to pause \ne to end  \npress h to go to home(remember this program will be executed)");
 			if(kbhit()) {
 				char ch=getch();
 				if(ch=='p') {
@@ -98,10 +123,28 @@ int main()
 				printf("simulation paused, press any key to continue");
 				getch();
 				}
-				if(ch=='e') {
-				printf("ending simulation in 5 seconds");
-				sleep(5);
-				return 0;
+				if(ch=='h')
+				{
+					goto lol;
+				}
+				if(ch=='e') 
+				{
+					printf("ending simulation in 10 seconds");
+					system("cls");
+					msec=0;
+					for(a=0;a<10;iterations++)
+					{
+						clock_t difference = clock() - before;
+    					msec = difference * 1000 / CLOCKS_PER_SEC;
+    					a=msec/1000;
+    					a=a-b;
+						if(a!=d)
+						{
+							printf("ending simulation in %d seconds\n",a);	
+						}
+    					d=a;
+					}
+					return 0;
 				}
 			}
 		}
@@ -113,5 +156,17 @@ int main()
 		r=r-s1-s2;	
 	}
 	printf("\nthe particles have crossed each others path or went through each other or just had a collision at t= %lf last position value we got was %lf of object 1 and %lf of object 2 with %lf time being passed since programn excuted",t,position1,position2,b);
-	return 0;
+	printf("press h to go to home page\npress e to exit");
+	if(kbhit())
+		{
+			char ch=getch();
+			if(ch=='h')
+			{
+				goto lol;
+			}
+			if(ch=='e')
+			{
+				return 0;
+			}
+		}
 }
