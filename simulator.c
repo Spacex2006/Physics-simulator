@@ -27,9 +27,9 @@ int main()
 		system("cls");
 		q1=0;
 		q2=0;
-		printf("plz enter mass of object1");
+		printf("plz enter mass of object1\n");
 		scanf("%lf",&m1);
-		printf("plz enter mass of object2");
+		printf("\nplz enter mass of object2\n");
 		scanf("%lf",&m2);
 	}
 	if(c==2)
@@ -37,24 +37,24 @@ int main()
 		system("cls");
 		m1=0;
 		m2=0;
-		printf("plz enter charge of object1");
+		printf("plz enter charge of object1\n");
 		scanf("%lf",&q1);
-		printf("plz enter charge of object2");
+		printf("\nplz enter charge of object2\n");
 		scanf("%lf",&q2);	
 	}
 	if(c==3)
 	{
 		system("cls");
-		printf("plz enter mass of object1");
+		printf("plz enter mass of object1\n");
 		scanf("%lf",&m1);
-		printf("plz enter mass of object2");
+		printf("\nplz enter mass of object2\n");
 		scanf("%lf",&m2);
-		printf("plz enter charge of object1");
+		printf("\nplz enter charge of object1\n");
 		scanf("%lf",&q1);
-		printf("plz enter charge of object2");
+		printf("\nplz enter charge of object2\n");
 		scanf("%lf",&q2);
 	}
-	printf("plz enter distance between objects");
+	printf("\nplz enter distance between objects\n");
 		scanf("%lf",&r);
 		if(r<=100)
 		t1=0.0000001;
@@ -90,6 +90,7 @@ int main()
 			printf("\nobject1:- \npostion:- %lf\nvelocity:- %lf\ntime:- %lf\n",position1,u1,t);
 			printf("\nobject2:- \npostion:- %lf\nvelocity:- %lf\ntime:- %lf\n",position2,u2,t);
 			printf("\ntime done: %d\n",b);
+			printf("press p to pause and e to end");
 			if(kbhit()) {
 				char ch=getch();
 				if(ch=='p') {
@@ -98,8 +99,8 @@ int main()
 				getch();
 				}
 				if(ch=='e') {
-				printf("ending simulation in 10 seconds");
-				sleep(10);
+				printf("ending simulation in 5 seconds");
+				sleep(5);
 				return 0;
 				}
 			}
