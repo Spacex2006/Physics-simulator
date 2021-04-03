@@ -4,6 +4,8 @@
 #define G 0.00000000006674
 #include <math.h>
 #include <time.h>
+#include <conio.h>
+#include <windows.h>
 int main() 
 {
 
@@ -88,7 +90,23 @@ int main()
 			printf("\nobject1:- \npostion:- %lf\nvelocity:- %lf\ntime:- %lf\n",position1,u1,t);
 			printf("\nobject2:- \npostion:- %lf\nvelocity:- %lf\ntime:- %lf\n",position2,u2,t);
 			printf("\ntime done: %d\n",b);
+			if(kbhit()) {
+				char ch=getch();
+				if(ch=='p') {
+				
+				printf("simulation paused, press any key to continue");
+				getch();
+				}
+				if(ch=='e') {
+				printf("ending simulation in 10 seconds");
+				sleep(10);
+				return 0;
+				}
+			}
 		}
+			
+			
+		
    		s3=s3+s1;
 		s4=s4+s2;
 		r=r-s1-s2;	
