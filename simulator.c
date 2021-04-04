@@ -20,6 +20,7 @@ int main()
 	lol:
 	double msec;
 	int a,b,c,d,e;
+	char f,g;
 	int iterations;
 	clock_t before = clock();
 	//starting simulation part
@@ -32,21 +33,15 @@ int main()
 	scanf("%d",&e);
 	if(e==2)
 	{
-		printf("please select text colour for interface ");
-		printf("Sorry but this part of simulator is still in development press h to go to home");
-		if(kbhit())
-		{
-			char ch=getch();
-			if(ch=='h')
-			{
-				goto lol;
-			}
-		}
+		system("cls");
+		printf("please select text colour for interface\n");
+		printf("Sorry but this part of simulator is still in development press any key to go to home");
+		getch();
+		goto lol;
 	}
 	system("cls");
 	printf("which forces do you want\npress 1 for only gravity\npress 2 for only electromagnetism\npress 3 for both\n");
 	scanf("%d",&c);
-	printf("%d",c);
 	if(c==1)
 	{
 		system("cls");
@@ -82,17 +77,17 @@ int main()
 	printf("\nplz enter distance between objects\n");
 		scanf("%lf",&r);
 		if(r<=100)
-		t1=0.0000001;
-		else if(r<=1000)
 		t1=0.000001;
-		else if(r<=10000)
+		else if(r<=1000)
 		t1=0.00001;
-		else if(r<=100000)
+		else if(r<=10000)
 		t1=0.0001;
-		else if(r<=1000000)
+		else if(r<=100000)
 		t1=0.001;
-		else if(r<=10000000)
+		else if(r<=1000000)
 		t1=0.01;
+		else if(r<=10000000)
+		t1=0.1;
 	someconstant1=(k*q1*q2+G*m1*m2)/(m1);
 	someconstant2=(k*q1*q2+G*m1*m2)/(m2);
 	for(msec=0;position1<position2;)
@@ -156,11 +151,14 @@ int main()
 		r=r-s1-s2;	
 	}
 	printf("\nthe particles have crossed each others path or went through each other or just had a collision at t= %lf last position value we got was %lf of object 1 and %lf of object 2 with %lf time being passed since programn excuted",t,position1,position2,b);
-	printf("press h to go to home page\npress e to exit");
-	if(kbhit())
+	printf("\npress h to go to home page\npress e to exit\nPLZ RESPOND WITHIN  1MIN OR ELSE CODE WILL AUTOMATICLY BE EXECUTED");
+	msec=0;
+	for(a=0;a<60;iterations++)
+	{
+		if(kbhit()) 
 		{
 			char ch=getch();
-			if(ch=='h')
+			if(ch=='h') 
 			{
 				goto lol;
 			}
@@ -169,4 +167,11 @@ int main()
 				return 0;
 			}
 		}
+		clock_t difference = clock() - before;
+    	msec = difference * 1000 / CLOCKS_PER_SEC;
+    	a=msec/1000;
+    	a=a-b;
+    	d=a;
+	}
+	return 0;
 }
