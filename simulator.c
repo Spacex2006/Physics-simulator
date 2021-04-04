@@ -8,33 +8,32 @@
 #include <windows.h>
 #include <graphics.h>
 #include <unistd.h>
-#define RED     "\x1b[31m"
-#define GREEN   "\x1b[32m"
-#define YELLOW  "\x1b[33m"
-#define BLUE    "\x1b[34m"
-#define MAGNETA "\x1b[35m"
-#define CYAN    "\x1b[36m"
-#define RESET   "\x1b[0m"
+#define red     "\x1b[31m"
+#define green   "\x1b[32m"
+#define yellow  "\x1b[33m"
+#define blue    "\x1b[34m"
+#define magneta "\x1b[35m"
+#define cyan    "\x1b[36m"
+#define reset   "\x1b[0m"
 int main() 
 {
 	lol:
 	double msec;
-	int a,b,c,d,e;
+	int a,b,c,d,e,h;
 	char f,g;
 	int iterations;
 	clock_t before = clock();
 	//starting simulation part
-	double q1, q2, r, m1, m2, someconstant1, someconstant2, s1, s2, s3, s4, a1, a2, position1=0, position2=1, u1=0, u2=0, t=0, t1, p1, p2, v;
+	double q1, q2, r, m1, m2, someconstant1, someconstant2, s1, s2, s3, s4, a1, a2, position1=0, position2=1, position3, position4, u1=0, u2=0, t=0, t1, p1, p2, v;
 	system("cls");
-	printf(GREEN"WELCOME\npress some thing to continue");
+	printf(yellow"WELCOME\npress some thing to continue");
 	getch();
 	system("cls");
-	printf("press 1 for default system \npress 2 to manualy select all settings");
+	printf("press 1 for default system \npress 2 to manualy select all settings\n");
 	scanf("%d",&e);
 	if(e==2)
 	{
 		system("cls");
-		printf("please select text colour for interface\n");
 		printf("Sorry but this part of simulator is still in development press any key to go to home");
 		getch();
 		goto lol;
@@ -77,21 +76,23 @@ int main()
 	printf("\nplz enter distance between objects\n");
 		scanf("%lf",&r);
 		if(r<=100)
-		t1=0.000001;
-		else if(r<=1000)
-		t1=0.00001;
-		else if(r<=10000)
-		t1=0.0001;
-		else if(r<=100000)
-		t1=0.001;
-		else if(r<=1000000)
 		t1=0.01;
-		else if(r<=10000000)
+		else if(r<=1000)
 		t1=0.1;
-	someconstant1=(k*q1*q2+G*m1*m2)/(m1);
-	someconstant2=(k*q1*q2+G*m1*m2)/(m2);
+		else if(r<=10000)
+		t1=1;
+		else if(r<=100000)
+		t1=10;
+		else if(r<=1000000)
+		t1=100;
+		else if(r<=10000000)
+		t1=1000;
+		someconstant1=(k*q1*q2+G*m1*m2)/(m1);
+		someconstant2=(k*q1*q2+G*m1*m2)/(m2);
 	for(msec=0;position1<position2;)
 	{
+		position4=position2;
+		position3=position1;
 		t=t+t1;
     	clock_t difference = clock() - before;
     	msec = difference * 1000 / CLOCKS_PER_SEC;
@@ -104,54 +105,54 @@ int main()
 		s2=u2*t+1/2*a2*t*t;
 		position1=s1-r/2;
 		position2=r/2-s2;
-   		{
-   			system("cls");
-   			printf("%lf",t1);
-			printf("\nobject1:- \npostion:- %lf\nvelocity:- %lf\ntime:- %lf\n",position1,u1,t);
-			printf("\nobject2:- \npostion:- %lf\nvelocity:- %lf\ntime:- %lf\n",position2,u2,t);
-			printf("\ntime done: %d\n",b);
-			printf("press p to pause \ne to end  \npress h to go to home(remember this program will be executed)");
-			if(kbhit()) {
-				char ch=getch();
-				if(ch=='p') {
-				
+   		system("cls");
+		printf("\nobject1:- \npostion:- %lf\nvelocity:- %lf\ntime:- %lf\n",position3,u1,t);
+		printf("\nobject2:- \npostion:- %lf\nvelocity:- %lf\ntime:- %lf\n",position4,u2,t);
+		printf("\ntime done: %d\n",b);
+		printf("press p to pause \ne to end  \npress h to go to home(remember this simulation2 will be executed)");
+		if(kbhit()) {
+			char ch=getch();
+			if(ch=='p') {
 				printf("simulation paused, press any key to continue");
 				getch();
-				}
-				if(ch=='h')
+			}
+			if(ch=='h')
+			{
+				goto lol;
+			}
+			if(ch=='e') 
+			{
+				printf("\nsimulation will end in 10 seconds\n");
+				msec=0;
+				for(a=0;a<10;iterations++)
 				{
-					goto lol;
-				}
-				if(ch=='e') 
-				{
-					printf("ending simulation in 10 seconds");
-					system("cls");
-					msec=0;
-					for(a=0;a<10;iterations++)
+					clock_t difference = clock() - before;
+    				msec = difference * 1000 / CLOCKS_PER_SEC;
+    				a=msec/1000;
+    				a=a-b;
+					if(a!=d)
 					{
-						clock_t difference = clock() - before;
-    					msec = difference * 1000 / CLOCKS_PER_SEC;
-    					a=msec/1000;
-    					a=a-b;
-						if(a!=d)
-						{
-							printf("ending simulation in %d seconds\n",a);	
+						h=15-a;
+			    		if(a>=10)
+			    		{
+							printf("program will be executed in %d seconds\r",h);
 						}
-    					d=a;
+    					else
+    					{
+    						printf("program will be executed in %d seconds \r",h);
+						}	
 					}
-					return 0;
+    				d=a;
 				}
+				return 0;
 			}
 		}
-			
-			
-		
    		s3=s3+s1;
 		s4=s4+s2;
 		r=r-s1-s2;	
 	}
-	printf("\nthe particles have crossed each others path or went through each other or just had a collision at t= %lf last position value we got was %lf of object 1 and %lf of object 2 with %lf time being passed since programn excuted",t,position1,position2,b);
-	printf("\npress h to go to home page\npress e to exit\nPLZ RESPOND WITHIN  1MIN OR ELSE CODE WILL AUTOMATICLY BE EXECUTED");
+	printf("\nthe particles have crossed each others path or went through each other or just had a collision at t= %lf last position value we got was %lf of object 1 and %lf of object 2 with %lf time being passed since programn excuted",t,position3,position4,b);
+	printf("\npress h to go to home page\npress e to exit\nPLZ RESPOND WITHIN  1MIN OR ELSE CODE WILL AUTOMATICLY BE EXECUTED\n");
 	msec=0;
 	for(a=0;a<60;iterations++)
 	{
@@ -171,6 +172,18 @@ int main()
     	msec = difference * 1000 / CLOCKS_PER_SEC;
     	a=msec/1000;
     	a=a-b;
+    	if(a!=d)
+    	{
+    		h=60-a;
+    		if(a>=10)
+    		{
+    			printf("program will be executed in %d seconds\r",h);
+			}
+    		else
+    		{
+    			printf("program will be executed in %d seconds \r",h);
+			}	
+		}
     	d=a;
 	}
 	return 0;
